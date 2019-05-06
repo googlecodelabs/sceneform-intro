@@ -1,0 +1,77 @@
+{
+  animations: [
+    {
+      clips: [
+        {
+          name: 'Take 001',
+          runtime_name: 'andy_dance',
+        },
+      ],
+      path: 'sampledata/models/andy_dance.fbx',
+    },
+    {
+      clips: [
+        {
+          name: 'Take 001',
+          runtime_name: 'andy_dance',
+        },
+      ],
+      path: 'sampledata/models/andy_dance.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: '08 - Default',
+      parameters: [
+        {
+          baseColor: [
+            0.35686299999999999,
+            0.60392199999999996,
+            0.35686299999999999,
+            1,
+          ],
+        },
+        {
+          baseColorMap: null,
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    scale: 0.25,
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/models/andy_dance.fbx',
+    name: 'andy_dance',
+    recenter: 'root',
+  },
+  version: '0.54:2',
+}
