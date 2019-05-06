@@ -45,7 +45,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation "com.google.ar.sceneform.ux:sceneform-ux:1.0.0"
+    implementation "com.google.ar.sceneform.ux:sceneform-ux:1.8.0"
+    implementation "com.google.ar.sceneform:animation:1.8.0"
 }
 
 apply plugin: 'com.google.ar.sceneform.plugin'
@@ -69,3 +70,10 @@ sceneform.asset('sampledata/models/igloo.obj',
         'default',
         'sampledata/models/igloo.sfa',
         'src/main/assets/igloo')
+
+
+sceneform.asset('sampledata/models/andy_dance.fbx',
+        'default',
+        'sampledata/models/andy_dance.sfa',
+        'src/main/assets/andy_dance',
+        ['sampledata/models/andy_dance.fbx'])
