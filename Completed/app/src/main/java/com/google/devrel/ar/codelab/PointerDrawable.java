@@ -19,21 +19,23 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class PointerDrawable extends Drawable {
     private final Paint paint = new Paint();
     private boolean enabled;
+
     @Override
     public void draw(@NonNull Canvas canvas) {
-        float cx = canvas.getWidth()/2;
-        float cy = canvas.getHeight()/2;
+        float cx = canvas.getWidth() / 2;
+        float cy = canvas.getHeight() / 2;
         if (enabled) {
             paint.setColor(Color.GREEN);
             canvas.drawCircle(cx, cy, 10, paint);
-        }else {
+        } else {
             paint.setColor(Color.GRAY);
             canvas.drawText("X", cx, cy, paint);
         }
@@ -51,8 +53,9 @@ public class PointerDrawable extends Drawable {
 
     @Override
     public int getOpacity() {
-        return 0;
+        return PixelFormat.UNKNOWN;
     }
+
     public boolean isEnabled() {
         return enabled;
     }
