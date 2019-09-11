@@ -24,12 +24,12 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.content.FileProvider;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.PixelCopy;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -80,10 +80,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,7 +162,6 @@ public class MainActivity extends AppCompatActivity {
                     intent.setDataAndType(photoURI, "image/*");
                     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                     startActivity(intent);
-
                 });
                 snackbar.show();
             } else {
@@ -194,12 +193,15 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
     private boolean updateTracking() {
         Frame frame = fragment.getArSceneView().getArFrame();
         boolean wasTracking = isTracking;
-        isTracking = frame.getCamera().getTrackingState() == TrackingState.TRACKING;
+        isTracking = frame != null &&
+                frame.getCamera().getTrackingState() == TrackingState.TRACKING;
         return isTracking != wasTracking;
     }
+
     private boolean updateHitTest() {
         Frame frame = fragment.getArSceneView().getArFrame();
         android.graphics.Point pt = getScreenCenter();
@@ -210,8 +212,8 @@ public class MainActivity extends AppCompatActivity {
             hits = frame.hitTest(pt.x, pt.y);
             for (HitResult hit : hits) {
                 Trackable trackable = hit.getTrackable();
-                if ((trackable instanceof Plane &&
-                        ((Plane) trackable).isPoseInPolygon(hit.getHitPose()))) {
+                if (trackable instanceof Plane &&
+                        ((Plane) trackable).isPoseInPolygon(hit.getHitPose())) {
                     isHitting = true;
                     break;
                 }
@@ -246,13 +248,14 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     private void initializeGallery() {
         LinearLayout gallery = findViewById(R.id.gallery_layout);
 
         ImageView andy = new ImageView(this);
         andy.setImageResource(R.drawable.droid_thumb);
         andy.setContentDescription("andy");
-        andy.setOnClickListener(view ->{addObject( Uri.parse("andy_dance.sfb"));});
+        andy.setOnClickListener(view ->{addObject(Uri.parse("andy_dance.sfb"));});
         gallery.addView(andy);
 
         ImageView cabin = new ImageView(this);
@@ -310,7 +313,6 @@ public class MainActivity extends AppCompatActivity {
         node.select();
         startAnimation(node, renderable);
     }
-
 
     public void startAnimation(TransformableNode node, ModelRenderable renderable){
         if(renderable==null || renderable.getAnimationDataCount() == 0) {
